@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "drinkedin-night-out": {
+      "type": "http",
+      "url": "https://ai.drinkedin.net/mcp/night-out"
+    }
+  }
+}

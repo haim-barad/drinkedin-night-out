@@ -1,0 +1,25 @@
+{
+  "name": "drinkedin-night-out",
+  "displayName": "DrinkedIn Night Out",
+  "version": "0.1.0",
+  "description": "Plans a short walkable night out between validated, licensed venues. Read-only, free, no account.",
+  "author": {
+    "name": "Haim Barad",
+    "email": "support@drinkedin.net",
+    "url": "https://drinkedin.net"
+  },
+  "homepage": "https://drinkedin.net/night-out",
+  "keywords": [
+    "night-out",
+    "bars",
+    "restaurants",
+    "walking-route",
+    "travel"
+  ],
+  "documentationUrl": "https://drinkedin.net/docs/night-out",
+  "privacyPolicyUrl": "https://drinkedin.net/p/privacy.html",
+  "termsOfServiceUrl": "https://drinkedin.net/p/terms.html",
+  "license": "MIT",
+  "repository": "https://github.com/haim-barad/drinkedin-night-out",
+  "icon": "./assets/icon.png"
+}

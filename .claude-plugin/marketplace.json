@@ -1,0 +1,24 @@
+{
+  "name": "drinkedin",
+  "owner": {
+    "name": "Haim Barad",
+    "email": "support@drinkedin.net"
+  },
+  "plugins": [
+    {
+      "name": "drinkedin-night-out",
+      "source": "./",
+      "description": "Plans a short walkable night out between validated, licensed venues. Read-only, free, no account.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Haim Barad",
+        "email": "support@drinkedin.net"
+      },
+      "homepage": "https://drinkedin.net/night-out",
+      "license": "MIT"
+    }
+  ],
+  "metadata": {
+    "description": "DrinkedIn's Claude Code plugins. One plugin: Night Out, a read-only planner for walkable nights out between validated, licensed venues."
+  }
+}
