@@ -9,6 +9,24 @@ This plugin connects Claude Code to the DrinkedIn Night Out MCP server at `https
 /plugin install drinkedin-night-out@drinkedin
 ```
 
+## Install (Cursor)
+
+Install **DrinkedIn Night Out** from the Cursor marketplace, or add the server to your `mcp.json`:
+
+```json
+{ "mcpServers": { "drinkedin-night-out": { "url": "https://ai.drinkedin.net/mcp/night-out" } } }
+```
+
+## Install (Gemini CLI)
+
+```
+gemini extensions install https://github.com/haim-barad/drinkedin-night-out
+```
+
+## Any other MCP client
+
+Streamable HTTP, no auth: `https://ai.drinkedin.net/mcp/night-out`
+
 ## What it does
 
 Ask for a night out near a place. The planner builds a walkable route of 2 to 4 stops. Every venue on the route has been validated against the venue's own website or an official liquor-licence register.

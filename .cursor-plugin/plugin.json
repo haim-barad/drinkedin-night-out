@@ -1,0 +1,22 @@
+{
+  "name": "drinkedin-night-out",
+  "version": "0.2.0",
+  "description": "Plans a short walkable night out between validated, licensed venues. Read-only, free, no account.",
+  "author": {
+    "name": "Haim Barad",
+    "email": "support@drinkedin.net"
+  },
+  "homepage": "https://drinkedin.net/docs/night-out",
+  "repository": "https://github.com/haim-barad/drinkedin-night-out",
+  "license": "MIT",
+  "keywords": [
+    "bars",
+    "nightlife",
+    "night-out",
+    "travel",
+    "local",
+    "mcp"
+  ],
+  "logo": "assets/icon.png",
+  "mcpServers": "mcp.json"
+}
