@@ -1,0 +1,76 @@
+---
+name: drinkedin-night-out
+description: Plan a walkable bar crawl, craft beer crawl, dinner and drinks, or club night near a place, using only venues DrinkedIn has validated against the venue's own site or an official licence register. Use when someone asks for a bar crawl, drinks, nightlife or a night out near a place, an address, a city or near them. Needs the free, read-only DrinkedIn Night Out MCP server. For adults of legal drinking age where they are.
+license: MIT
+compatibility: Needs the MCP server https://ai.drinkedin.net/mcp/night-out (streamable HTTP, no sign-in, no key). Without that server the skill cannot plan anything.
+metadata:
+  version: "1.0.1"
+  homepage: https://drinkedin.net/docs/night-out
+  publisher: Haim Barad
+---
+
+# DrinkedIn Night Out
+
+Plans a walkable route of 2 to 4 stops from real venues that DrinkedIn has validated against the venue's own site or an official licence register. Read-only: nothing is booked or bought, and the planner adds no details of its own.
+
+## Setup check
+
+1. At the start of a session, call `drinkedin_get_guide` once. It takes no input and returns some places with validated venues, the vibes you can apply, the route styles and the relay rules.
+2. If `drinkedin_get_guide` and `drinkedin_plan_night_out` are not available, tell the person to add the MCP server `https://ai.drinkedin.net/mcp/night-out` (Streamable HTTP, no sign-in), then stop. In Claude Code: `claude mcp add --transport http drinkedin-night-out https://ai.drinkedin.net/mcp/night-out`. Never invent a plan.
+
+## Choose the inputs
+
+Call `drinkedin_plan_night_out`. It needs a place.
+
+- `latitude` and `longitude`: preferred, send both. Take the point from the person's own shared location for "near me", from the centre of an area they name, or from the destination of a trip they are planning. If you hold no location for them, ask. Never pick a default location.
+- `address`: only when you have no coordinates (coordinates win). A street address, landmark or area name. It is geocoded to one point by OpenStreetMap Nominatim, which ranks matches and does not confirm them. The reply echoes `geocoded_as`: tell the person what it matched, and confirm when the text was ambiguous.
+- `near`: your label for the point, such as "near me". It is echoed back and never changes the plan.
+- `city` with `region` or `country`: only when the name identifies one place. A name several places share returns `needs_input` with labelled choices.
+- `place_key`: taken from a `needs_input` reply, it names exactly one of the choices. Send it back to choose that place.
+- `style`, `stops` (2 to 4), `max_walk_m` and `vibes` (taken from the guide) shape the route. `budget`, `start_time` and `party_size` are accepted but do not change the route, so do not ask the person for them. With `budget` the reply adds `budget_not_verifiable`: say prices are not known. Replies are in English.
+
+## Styles
+
+A `style` limits which kinds of place the route uses and sets the default stops and walking limit. Your own `stops` and `max_walk_m` win. It says nothing about hours, prices or atmosphere. With too few matching venues the result is `partial` or `no_coverage`, never other kinds of place. Leave it out if the person asked for no particular shape. An unknown style returns `needs_input`.
+
+- `bar_crawl`: bars and hotel bars only, at least 3 stops, with short walks (400 m by default, the walk to the first stop included). If it returns `no_coverage`, try once with `vibes: ["bars"]` and no style before planning with no filter. A route with no style or vibe can be all restaurants: if the person asked for drinks, say which stops are bars.
+- `craft_beer_crawl`: brewpubs and breweries only.
+- `dinner_and_drinks`: a restaurant first, then bars.
+- `club_night`: bars first, then a nightclub as the last stop.
+
+## What each status means
+
+Every reply carries `status`, `meaning`, `say_to_owner` and `notices`.
+
+| Status | What to do |
+| --- | --- |
+| `planned` | A route with the stops asked for. Show the stops as returned and add no venue or detail of your own. |
+| `partial` | Fewer stops than asked for: the longest walkable route the validated venues allow. Say so and show the route. If a style was used, offer to try without it. Do not fill the gap with other places. |
+| `needs_input` | The tool needs something from the person: a location, a choice between places that share a name, a more specific address, valid coordinates, or a vibe or style it knows. Ask for what `meaning` says is missing, then call again. Never guess between choices. |
+| `no_coverage` | Not enough validated venues close together, or no venue records for that place. Say so plainly. Where the reply lists `largest_places`, you may offer them as "some places with validated venues" (not a ranking); never call a place covered, best covered or supported. Do not suggest venues of your own and do not offer to search the web for others. If a `style` or `vibes` was used, say so and offer to try without it; ask before raising `max_walk_m`. |
+| `error` | A fault on DrinkedIn's side, flagged `isError`. Tell the person it failed and try again in a moment. |
+
+`drinkedin_get_guide` replies with status `ok`. Each stop's `hours.status` and `price.status` are `unverified`; these are not plan statuses.
+
+## Relay rules
+
+- Show the stops as returned, in order, with the name, address, category, walk and links the reply gives. Add nothing.
+- Walking times are estimates (straight-line distance times 1.3). Say so.
+- Hours and prices are never stated. Each stop marks them unverified: tell the person to check with the venue.
+- Include the legal drinking age notice: say the plan is for adults "of legal drinking age where they are". Never state an age as a number, not even the local one, and do not add what the local law says.
+- Name the area with the person's own words (`near_as_given`) or the town in the stops' addresses. Do not add street, neighbourhood or terrain names of your own, and do not read raw coordinates back unless asked.
+- DrinkedIn does not sell or serve alcohol.
+
+## If the person is under the legal drinking age
+
+If the person says they are under the legal drinking age where they are, do not call `drinkedin_plan_night_out`. Say in one sentence that DrinkedIn plans are for adults of legal drinking age where they are, and offer help with something that is not about drinking. Do not state an age as a number and do not lecture. Do not present places from your own knowledge as a DrinkedIn plan; if you suggest any, say they come from general knowledge and are unchecked.
+
+## Swap a stop
+
+After a route, `next` holds a ready call that swaps the last stop: the same arguments plus `exclude_ids` with that stop's `venue_id`. To replace a different stop, call again with its `venue_id` added to `exclude_ids`. Offer a swap when the person dislikes a stop.
+
+## Privacy
+
+- Use only a location the person shared or a place they named. Do not infer one.
+- A typed `address` leaves DrinkedIn: it is sent to the public OpenStreetMap Nominatim geocoder. Coordinates need no lookup, so prefer them when you have them. Say so if the person asks where their address goes.
+- No sign-in, key or token is involved, and nothing is written. Policies: https://drinkedin.net/p/privacy.html. Docs: https://drinkedin.net/docs/night-out.

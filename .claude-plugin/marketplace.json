@@ -9,7 +9,7 @@
       "name": "drinkedin-night-out",
       "source": "./",
       "description": "Plans a short walkable night out between validated, licensed venues. Read-only, free, no account.",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "author": {
         "name": "Haim Barad",
         "email": "support@drinkedin.net"

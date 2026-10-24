@@ -1,7 +1,7 @@
 {
   "name": "drinkedin-night-out",
   "displayName": "DrinkedIn Night Out",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Plans a short walkable night out between validated, licensed venues. Read-only, free, no account.",
   "author": {
     "name": "Haim Barad",
