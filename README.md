@@ -49,6 +49,7 @@ Example prompts:
 - **Statuses:** a reply is `planned`, `partial`, `needs_input`, `no_coverage` or `error`. The planner works best where coverage is validated. Where coverage is thin it says so instead of padding the route.
 - **Estimates:** walking times are estimates. Hours and prices are never asserted, so check the venue's own site.
 - **Geocoding:** a typed address is sent to OpenStreetMap Nominatim to find the point. The reply's `geocoded_as` shows what it matched.
+- **Plan links:** a `planned` or `partial` route can carry `plan_url`, a page on drinkedin.net with the stops, the walks and a map that the person may open or share. DrinkedIn keeps that route for 30 days after it was last planned, then deletes it. It keeps only the venues' public data, the walks, the style label, the town the stops share and the dates; never the person's coordinates, typed address, IP address or client details.
 - **Age:** alcohol is for people of legal drinking age where they are.
 
 ## Links

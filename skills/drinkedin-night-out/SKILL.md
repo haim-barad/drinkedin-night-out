@@ -4,7 +4,7 @@ description: Plan a walkable bar crawl, craft beer crawl, dinner and drinks, or 
 license: MIT
 compatibility: Needs the MCP server https://ai.drinkedin.net/mcp/night-out (streamable HTTP, no sign-in, no key). Without that server the skill cannot plan anything.
 metadata:
-  version: "1.0.1"
+  version: "1.1.0"
   homepage: https://drinkedin.net/docs/night-out
   publisher: Haim Barad
 ---
@@ -69,8 +69,14 @@ If the person says they are under the legal drinking age where they are, do not 
 
 After a route, `next` holds a ready call that swaps the last stop: the same arguments plus `exclude_ids` with that stop's `venue_id`. To replace a different stop, call again with its `venue_id` added to `exclude_ids`. Offer a swap when the person dislikes a stop.
 
+## Share or save the plan
+
+A `planned` or `partial` route can carry `route.plan_url`, with its id in `route.plan_id`: a page on drinkedin.net that shows the stops, the walks between them and a route map. Offer it when the person wants to share or save the plan. Give it as a link the person may open, exactly as returned; never build or change a plan link yourself. If the route has no `plan_url`, the plan could not be saved: the route is still good, and there is no link to offer. When the person asks what the link keeps, use the Privacy section below.
+
 ## Privacy
 
 - Use only a location the person shared or a place they named. Do not infer one.
 - A typed `address` leaves DrinkedIn: it is sent to the public OpenStreetMap Nominatim geocoder. Coordinates need no lookup, so prefer them when you have them. Say so if the person asks where their address goes.
-- No sign-in, key or token is involved, and nothing is written. Policies: https://drinkedin.net/p/privacy.html. Docs: https://drinkedin.net/docs/night-out.
+- No sign-in, key or token is involved.
+- A route with a `plan_url` is kept by DrinkedIn so the link works: for 30 days after that route was last planned, then it is deleted. The copy holds only the venues' public data (name, address, category, the venue's own coordinates, links, hours wording and sourced facts), the walks between stops, the style label, the town the stops share, and the dates it was made and expires. It never holds the person's coordinates, typed address, place name or `near` label, their IP address, or anything about the client. Anyone with the link can open the page. The id in it cannot be guessed, and the same route gets the same link.
+- Policies: https://drinkedin.net/p/privacy.html. Docs: https://drinkedin.net/docs/night-out.

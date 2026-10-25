@@ -1,6 +1,6 @@
 {
   "name": "drinkedin-night-out",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Plans a short walkable night out between validated, licensed venues. Read-only, free, no account.",
   "mcpServers": {
     "drinkedin-night-out": {
