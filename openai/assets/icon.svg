@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#1F2A44"/>
+  <!-- crescent moon -->
+  <path d="M150 88 A 70 70 0 1 0 220 196 A 56 56 0 1 1 150 88 Z" fill="#FFFFFF"/>
+  <!-- zig-zag dashed walking path -->
+  <path d="M120 420 L 230 380 L 190 320 L 330 300" fill="none" stroke="#FFFFFF"
+        stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="28 26"/>
+  <!-- destination pin -->
+  <g transform="translate(370 262)">
+    <path d="M0 58 C -13 37, -48 6, -48 -28 A 48 48 0 1 1 48 -28 C 48 6, 13 37, 0 58 Z" fill="#358ACB"/>
+    <circle cx="0" cy="-28" r="18" fill="#1F2A44"/>
+  </g>
+</svg>
