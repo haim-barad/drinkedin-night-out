@@ -1,6 +1,6 @@
 # DrinkedIn Night Out
 
-This plugin connects Claude Code to the DrinkedIn Night Out MCP server at `https://ai.drinkedin.net/mcp/night-out` (Streamable HTTP). The server is read-only and free, and it needs no account or key.
+This plugin connects Claude Code to the DrinkedIn Night Out MCP server at `https://ai.drinkedin.net/mcp/night-out` (Streamable HTTP). The server is free and needs no account or key. It books and buys nothing. The one thing it saves is a planned route, so the route's share link works (see Plan links below); it never saves your location.
 
 ## Install (Claude Code)
 
@@ -33,10 +33,10 @@ Ask for a night out near a place. The planner builds a walkable route of 2 to 4 
 
 There are two tools:
 
-- `drinkedin_plan_night_out` plans the route.
+- `drinkedin_plan_night_out` plans the route and saves it for its share link (public venue data only, 30 days).
   - Give it latitude and longitude (preferred), a street address or landmark, or a place name with its region or country.
   - Optional: `style` (`bar_crawl`, `craft_beer_crawl`, `dinner_and_drinks`, `club_night`), `stops` (2 to 4) and `max_walk_m` (200 to 2000).
-- `drinkedin_get_guide` explains how to call the planner and the rules for relaying a plan.
+- `drinkedin_get_guide` explains how to call the planner and the rules for relaying a plan. It is read-only.
 
 Example prompts:
 

@@ -1,7 +1,7 @@
 {
   "name": "drinkedin-night-out",
   "version": "0.3.0",
-  "description": "Plans a short walkable night out between validated, licensed venues. Read-only, free, no account.",
+  "description": "Plans a short walkable night out between validated, licensed venues. Free, no account; saves only planned routes, for share links.",
   "mcpServers": {
     "drinkedin-night-out": {
       "httpUrl": "https://ai.drinkedin.net/mcp/night-out",
