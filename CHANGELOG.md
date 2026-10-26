@@ -1,5 +1,11 @@
 # Changelog
 
+## OpenAI package 1.0.0 (openai/, SKILL.md 1.1.0 openai variant)
+
+- New `openai/` folder: the package for OpenAI's plugin directory (ChatGPT and Codex) in the portable Agent Plugins format: `plugin.json` with listing, review (5 positive and 3 negative test cases, `commerce: false`) and publication data (countries US and ES) under `extensions.com.openai`; `mcp.json` (streamable HTTP, auth none, no headers); the skill with `agents/openai.yaml`; the repo icon.
+- The OpenAI skill plans around a town or city the person names, or the approximate town the app shares, and never asks for a precise location, GPS coordinates or a street address. It matches the server's OpenAI client variant of `drinkedin_plan_night_out`.
+- `openai/scripts/validate.py` and `build_zip.py` validate the package and write `openai/dist/drinkedin-night-out-openai.zip` (git-ignored). The root Claude, Cursor and Gemini files are unchanged.
+
 ## 0.3.0 (SKILL.md 1.1.0)
 
 - The skill describes `route.plan_url` (with `route.plan_id`), which a `planned` or `partial` route can now carry: a drinkedin.net page with the stops, the walks between them and a route map. The assistant offers it when the person wants to share or save the plan and gives it as a link the person may open, exactly as returned.

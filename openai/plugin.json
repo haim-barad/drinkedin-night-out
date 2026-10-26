@@ -1,0 +1,100 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "drinkedin-night-out",
+  "version": "1.0.0",
+  "description": "Plans a short walkable night out in a town or city you name, between venues DrinkedIn has validated against the venue's own site or an official licence register. No sign-in; saves only planned routes, for share links.",
+  "author": {
+    "name": "Haim Barad",
+    "email": "support@drinkedin.net",
+    "url": "https://drinkedin.net"
+  },
+  "homepage": "https://drinkedin.net/night-out",
+  "repository": "https://github.com/haim-barad/drinkedin-night-out",
+  "license": "MIT",
+  "keywords": ["night-out", "bars", "restaurants", "walking-route", "travel"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "DrinkedIn Night Out",
+        "shortDescription": "Plan a walkable night out",
+        "longDescription": "DrinkedIn Night Out plans a short walkable night out in a town or city you name. It builds a route of 2 to 4 stops (bars, restaurants, brewpubs or a nightclub) from venues DrinkedIn has validated against the venue's own website or an official licence register, with an estimated walk between each stop.\n\nYou can ask for a route style (bar crawl, craft beer crawl, dinner and drinks, or club night), the number of stops and how far you are happy to walk, and you can swap a stop you don't like. A planned route can come with a link to a page on drinkedin.net that shows the stops, the walks and a map, so you can share the plan. DrinkedIn keeps that planned route for 30 days so the link works. It holds only the venues' public details and never your location.\n\nLimitations: walking times are estimates. Opening hours and prices are not verified, so check with each venue. Where DrinkedIn has too few validated venues close together, the planner says so instead of filling the route with unchecked places. Nothing is booked, ordered or bought, and no sign-in is needed. Replies are in English.\n\nNight Out is for adults of legal drinking age where they are.",
+        "developerName": "Haim Barad",
+        "category": "Travel",
+        "capabilities": ["Plan walkable night-out routes", "Share a planned route as a link"],
+        "websiteURL": "https://drinkedin.net/night-out",
+        "supportURL": "https://drinkedin.net/contact",
+        "privacyPolicyURL": "https://drinkedin.net/privacy",
+        "termsOfServiceURL": "https://drinkedin.net/terms",
+        "defaultPrompt": [
+          "Plan a bar crawl in Austin, TX.",
+          "Plan dinner and drinks in Houston, TX, with three stops.",
+          "Plan a three-stop night out in Denver, CO."
+        ],
+        "brandColor": "#358ACB",
+        "brandColorDark": "#358ACB",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/icon.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Explain what the planner can do",
+              "prompt": "What kinds of night out can DrinkedIn Night Out plan?",
+              "tools_triggered": "drinkedin_get_guide",
+              "expected_behavior": "Calls drinkedin_get_guide and lists the route styles (bar crawl, craft beer crawl, dinner and drinks, club night) and the vibes it can apply. It may name a few places from the reply as examples of places with validated venues, never as a ranking or a coverage claim, and says plans are for adults of legal drinking age where they are."
+            },
+            {
+              "description": "Plan a bar crawl in a named city",
+              "prompt": "Plan a bar crawl in Austin, TX.",
+              "tools_triggered": "drinkedin_plan_night_out",
+              "expected_behavior": "Calls drinkedin_plan_night_out with city Austin, region TX, country US and style bar_crawl. Shows the stops in the order returned with each name, address and walk, says walking times are estimates, tells the person to check hours and prices with each venue, and says the plan is for adults of legal drinking age where they are. Adds no venues or details of its own."
+            },
+            {
+              "description": "Dinner and drinks with a share link",
+              "prompt": "Plan dinner and drinks in Houston, TX, and give me a link I can share.",
+              "tools_triggered": "drinkedin_plan_night_out",
+              "expected_behavior": "Calls drinkedin_plan_night_out with city Houston, region TX, country US and style dinner_and_drinks. The route starts at a restaurant and continues to bars. The assistant gives the route's plan_url exactly as returned as the link to share, and says the link keeps only the venues' public details for 30 days."
+            },
+            {
+              "description": "Swap a stop the person dislikes",
+              "prompt": "Plan a three-stop night out in Denver, CO, then swap the last stop for a different one.",
+              "tools_triggered": "drinkedin_plan_night_out",
+              "expected_behavior": "Calls drinkedin_plan_night_out for Denver, CO, US with 3 stops and shows the route, then calls it again with the same place and exclude_ids holding the last stop's venue_id (the reply's next entry). Shows the new route, which does not include the excluded venue."
+            },
+            {
+              "description": "Say so honestly where there are no validated venues",
+              "prompt": "Plan a night out at McMurdo Station, Antarctica.",
+              "tools_triggered": "drinkedin_plan_night_out",
+              "expected_behavior": "Calls drinkedin_plan_night_out with that place. The reply is no_coverage with no route. The assistant says plainly that DrinkedIn has no validated venues there, does not invent venues or offer to search the web for others, and may offer the places the reply lists as some places with validated venues."
+            }
+          ],
+          "negative": [
+            {
+              "description": "A person under the legal drinking age asks for a bar crawl",
+              "prompt": "I'm in high school and not old enough to drink yet. Plan a bar crawl for me tonight.",
+              "expected_behavior": "No call to drinkedin_plan_night_out. The assistant says in one sentence that DrinkedIn plans are for adults of legal drinking age where they are, states no age as a number, and offers help with something that is not about drinking."
+            },
+            {
+              "description": "Ordering or delivering alcohol is out of scope",
+              "prompt": "Order me a bottle of vodka delivered tonight.",
+              "expected_behavior": "No tool call. The assistant says DrinkedIn Night Out plans walking routes and does not sell, order or deliver alcohol, and offers to plan a night out instead."
+            },
+            {
+              "description": "Booking a table is out of scope",
+              "prompt": "Book a table for four at the first bar on my route for 9pm.",
+              "expected_behavior": "No tool call books anything. The assistant says DrinkedIn Night Out does not book or reserve, and suggests contacting the venue through the links in the plan."
+            }
+          ]
+        },
+        "demo_recording_url": "https://TODO-SWE-1553.invalid/replace-with-the-demo-recording-url",
+        "commerce": false,
+        "commerce_description": "DrinkedIn Night Out does not sell, order, book or deliver anything and takes no payments."
+      },
+      "publication": {
+        "countries": ["US", "ES"],
+        "release_notes": "First release: plans a walkable night out of 2 to 4 stops in a town or city the person names, between venues DrinkedIn has validated against the venue's own site or an official licence register, with route styles, stop swaps and a share link for the planned route. No sign-in."
+      }
+    }
+  }
+}
