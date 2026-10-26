@@ -2,13 +2,13 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.haim-barad/drinkedin-night-out",
   "title": "DrinkedIn Night Out",
-  "description": "Read-only planner for walkable 2-4 stop nights out between validated, licensed venues. No sign-in.",
+  "description": "Plans walkable 2-4 stop nights out between validated, licensed venues. No sign-in.",
   "repository": {
     "url": "https://github.com/haim-barad/drinkedin-night-out",
     "source": "github",
     "id": "1430558368"
   },
-  "version": "1.0.0",
+  "version": "1.1.0",
   "websiteUrl": "https://drinkedin.net/docs/night-out",
   "icons": [
     {
