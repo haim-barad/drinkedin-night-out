@@ -29,7 +29,7 @@ Streamable HTTP, no auth: `https://ai.drinkedin.net/mcp/night-out`
 
 ## What it does
 
-Ask for a night out near a place. The planner builds a walkable route of 2 to 4 stops. Every venue on the route has been validated against the venue's own website or an official liquor-licence register.
+Ask for a night out near a place. The planner builds a walkable route of 2 to 4 stops. Every venue on the route has been validated against an official liquor-licence register or premises census, or the venue's own website.
 
 There are two tools:
 

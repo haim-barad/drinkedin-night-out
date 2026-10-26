@@ -8,7 +8,7 @@
     {
       "name": "drinkedin-night-out",
       "source": "./",
-      "description": "Plans a short walkable night out between validated, licensed venues. Free, no account; saves only planned routes, for share links.",
+      "description": "Plans a short walkable night out between officially validated venues. Free, no account; saves only planned routes, for share links.",
       "version": "0.3.0",
       "author": {
         "name": "Haim Barad",
@@ -19,6 +19,6 @@
     }
   ],
   "metadata": {
-    "description": "DrinkedIn's Claude Code plugins. One plugin: Night Out, a free planner for walkable nights out between validated, licensed venues."
+    "description": "DrinkedIn's Claude Code plugins. One plugin: Night Out, a free planner for walkable nights out between officially validated venues."
   }
 }
