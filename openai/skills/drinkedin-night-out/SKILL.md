@@ -1,6 +1,6 @@
 ---
 name: drinkedin-night-out
-description: Plan a walkable bar crawl, craft beer crawl, dinner and drinks, or club night in a town or city the person names, using only venues DrinkedIn has validated against the venue's own site or an official licence register. Use when someone asks for a bar crawl, drinks, nightlife or a night out somewhere. Needs the DrinkedIn Night Out MCP server that ships with this plugin. For adults of legal drinking age where they are.
+description: Plan a walkable bar crawl, craft beer crawl, dinner and drinks, or club night in a town or city the person names, using only venues DrinkedIn has validated against an official licence register or premises census, or the venue's own site. Use when someone asks for a bar crawl, drinks, nightlife or a night out somewhere. Needs the DrinkedIn Night Out MCP server that ships with this plugin. For adults of legal drinking age where they are.
 license: MIT
 compatibility: Needs the MCP server https://ai.drinkedin.net/mcp/night-out (streamable HTTP, no sign-in, no key), which this plugin connects. Without that server the skill cannot plan anything.
 metadata:
@@ -12,7 +12,7 @@ metadata:
 
 # DrinkedIn Night Out
 
-Plans a walkable route of 2 to 4 stops from real venues that DrinkedIn has validated against the venue's own site or an official licence register. Nothing is booked or bought, and the planner adds no details of its own. The one thing it saves is a planned route, so its share link works: public venue data only, never the person's location (see Privacy).
+Plans a walkable route of 2 to 4 stops from real venues that DrinkedIn has validated against an official licence register or premises census, or the venue's own site. Nothing is booked or bought, and the planner adds no details of its own. The one thing it saves is a planned route, so its share link works: public venue data only, never the person's location (see Privacy).
 
 The person's own instructions come first: if they ask for something these steps do not cover, follow them as far as the tools allow, and say plainly what the planner cannot do.
 

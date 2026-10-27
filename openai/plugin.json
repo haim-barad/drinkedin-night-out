@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "drinkedin-night-out",
   "version": "1.0.0",
-  "description": "Plans a short walkable night out in a town or city you name, between venues DrinkedIn has validated against the venue's own site or an official licence register. No sign-in; saves only planned routes, for share links.",
+  "description": "Plans a short walkable night out in a town or city you name, between venues DrinkedIn has validated against an official licence register or premises census, or the venue's own site. No sign-in; saves only planned routes, for share links.",
   "author": {
     "name": "Haim Barad",
     "email": "support@drinkedin.net",
@@ -17,7 +17,7 @@
       "interface": {
         "displayName": "DrinkedIn Night Out",
         "shortDescription": "Plan a walkable night out",
-        "longDescription": "DrinkedIn Night Out plans a short walkable night out in a town or city you name. It builds a route of 2 to 4 stops (bars, restaurants, brewpubs or a nightclub) from venues DrinkedIn has validated against the venue's own website or an official licence register, with an estimated walk between each stop.\n\nYou can ask for a route style (bar crawl, craft beer crawl, dinner and drinks, or club night), the number of stops and how far you are happy to walk, and you can swap a stop you don't like. A planned route can come with a link to a page on drinkedin.net that shows the stops, the walks and a map, so you can share the plan. DrinkedIn keeps that planned route for 30 days so the link works. It holds only the venues' public details and never your location.\n\nLimitations: walking times are estimates. Opening hours and prices are not verified, so check with each venue. Where DrinkedIn has too few validated venues close together, the planner says so instead of filling the route with unchecked places. Nothing is booked, ordered or bought, and no sign-in is needed. Replies are in English.\n\nNight Out is for adults of legal drinking age where they are.",
+        "longDescription": "DrinkedIn Night Out plans a short walkable night out in a town or city you name. It builds a route of 2 to 4 stops (bars, restaurants, brewpubs or a nightclub) from venues DrinkedIn has validated against an official licence register or premises census, or the venue's own website, with an estimated walk between each stop.\n\nYou can ask for a route style (bar crawl, craft beer crawl, dinner and drinks, or club night), the number of stops and how far you are happy to walk, and you can swap a stop you don't like. A planned route can come with a link to a page on drinkedin.net that shows the stops, the walks and a map, so you can share the plan. DrinkedIn keeps that planned route for 30 days so the link works. It holds only the venues' public details and never your location.\n\nLimitations: walking times are estimates. Opening hours and prices are not verified, so check with each venue. Where DrinkedIn has too few validated venues close together, the planner says so instead of filling the route with unchecked places. Nothing is booked, ordered or bought, and no sign-in is needed. Replies are in English.\n\nNight Out is for adults of legal drinking age where they are.",
         "developerName": "Haim Barad",
         "category": "Travel",
         "capabilities": ["Plan walkable night-out routes", "Share a planned route as a link"],
@@ -93,7 +93,7 @@
       },
       "publication": {
         "countries": ["US", "ES"],
-        "release_notes": "First release: plans a walkable night out of 2 to 4 stops in a town or city the person names, between venues DrinkedIn has validated against the venue's own site or an official licence register, with route styles, stop swaps and a share link for the planned route. No sign-in."
+        "release_notes": "First release: plans a walkable night out of 2 to 4 stops in a town or city the person names, between venues DrinkedIn has validated against an official licence register or premises census, or the venue's own site, with route styles, stop swaps and a share link for the planned route. No sign-in."
       }
     }
   }
