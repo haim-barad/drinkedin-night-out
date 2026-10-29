@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+- `scripts/validate.py` checks every per-channel manifest in one run (Claude Code plugin and marketplace, Cursor, Gemini CLI, MCP Registry `server.json`, the skill, and the OpenAI package and ZIP when `openai/` is present), plus cross-channel agreement and the copy rules. Stdlib only, no network. Negative tests in `tests/test_validate.py` (`python3 -m unittest discover -s tests`). Repo tooling only: no manifest references it, and no version bump.
+
+## 0.4.0 (SKILL.md 1.2.0)
+
+- The skill's `description` (the text hosts read when deciding to load it) now also covers a request from someone under the legal drinking age where they are: then no venues are planned or suggested, and no age is stated as a number. In the SWE-1547 eval, Claude Code and Hermes did not load the skill for such a request and answered from their own knowledge; a rule that must hold when the skill would not otherwise trigger has to be in the description.
+- The under-age section now also says not to suggest venues from general knowledge, and reads "Keep it to one sentence" instead of "do not lecture" (scanners flag caveat-suppressing phrases).
+- Version 0.4.0 in `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `.cursor-plugin/plugin.json` and `gemini-extension.json`. `server.json` (the MCP Registry entry) is unchanged at 1.1.0: the server URL and description did not change.
+
 ## 0.3.0 (SKILL.md 1.1.0)
 
 - The skill describes `route.plan_url` (with `route.plan_id`), which a `planned` or `partial` route can now carry: a drinkedin.net page with the stops, the walks between them and a route map. The assistant offers it when the person wants to share or save the plan and gives it as a link the person may open, exactly as returned.
