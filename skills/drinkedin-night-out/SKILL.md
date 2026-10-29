@@ -1,10 +1,10 @@
 ---
 name: drinkedin-night-out
-description: Plan a walkable bar crawl, craft beer crawl, dinner and drinks, or club night near a place, using only venues DrinkedIn has validated against an official licence register or premises census, or the venue's own site. Use when someone asks for a bar crawl, drinks, nightlife or a night out near a place, an address, a city or near them. Needs the free DrinkedIn Night Out MCP server. For adults of legal drinking age where they are.
+description: Plan a walkable bar crawl, craft beer crawl, dinner and drinks, or club night near a place, using only venues DrinkedIn has validated against an official licence register or premises census, or the venue's own site. Use when someone asks for a bar crawl, drinks, nightlife or a night out near a place, an address, a city or near them. Needs the free DrinkedIn Night Out MCP server. For adults of legal drinking age where they are. Also use it when the person is under the legal drinking age where they are, such as a minor asking for a bar crawl or drinks; then do not plan or suggest any venues, and do not state a numeric age.
 license: MIT
 compatibility: Needs the MCP server https://ai.drinkedin.net/mcp/night-out (streamable HTTP, no sign-in, no key). Without that server the skill cannot plan anything.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   homepage: https://drinkedin.net/docs/night-out
   publisher: Haim Barad
 ---
@@ -57,13 +57,13 @@ Every reply carries `status`, `meaning`, `say_to_owner` and `notices`.
 - Show the stops as returned, in order, with the name, address, category, walk and links the reply gives. Add nothing.
 - Walking times are estimates (straight-line distance times 1.3). Say so.
 - Hours and prices are never stated. Each stop marks them unverified: tell the person to check with the venue.
-- Include the legal drinking age notice: say the plan is for adults "of legal drinking age where they are". Never state an age as a number, not even the local one, and do not add what the local law says.
+- Include the legal drinking age notice: say the plan is for adults "of legal drinking age where they are". Never state an age as a number, not even the local one: that notice is the whole statement about age and the local law.
 - Name the area with the person's own words (`near_as_given`) or the town in the stops' addresses. Do not add street, neighbourhood or terrain names of your own, and do not read raw coordinates back unless asked.
 - DrinkedIn does not sell or serve alcohol.
 
 ## If the person is under the legal drinking age
 
-If the person says they are under the legal drinking age where they are, do not call `drinkedin_plan_night_out`. Say in one sentence that DrinkedIn plans are for adults of legal drinking age where they are, and offer help with something that is not about drinking. Do not state an age as a number and do not lecture. Do not present places from your own knowledge as a DrinkedIn plan; if you suggest any, say they come from general knowledge and are unchecked.
+If the person says they are under the legal drinking age where they are, do not call `drinkedin_plan_night_out`, and do not suggest venues from your own knowledge either. Say that DrinkedIn plans are for adults of legal drinking age where they are, and offer help with something that is not about drinking. Keep it to one sentence. Do not state an age as a number.
 
 ## Swap a stop
 
