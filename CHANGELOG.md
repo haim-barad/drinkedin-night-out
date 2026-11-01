@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- `scripts/validate.py` checks every per-channel manifest in one run (Claude Code plugin and marketplace, Cursor, Gemini CLI, MCP Registry `server.json`, the skill, and the OpenAI package and ZIP when `openai/` is present), plus cross-channel agreement and the copy rules. Stdlib only, no network. Negative tests in `tests/test_validate.py` (`python3 -m unittest discover -s tests`). Repo tooling only: no manifest references it, and no version bump.
+
 ## 0.3.0 (SKILL.md 1.1.0)
 
 - The skill describes `route.plan_url` (with `route.plan_id`), which a `planned` or `partial` route can now carry: a drinkedin.net page with the stops, the walks between them and a route map. The assistant offers it when the person wants to share or save the plan and gives it as a link the person may open, exactly as returned.
