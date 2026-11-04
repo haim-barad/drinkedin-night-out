@@ -4,6 +4,13 @@
 
 - `scripts/validate.py` checks every per-channel manifest in one run (Claude Code plugin and marketplace, Cursor, Gemini CLI, MCP Registry `server.json`, the skill, and the OpenAI package and ZIP when `openai/` is present), plus cross-channel agreement and the copy rules. Stdlib only, no network. Negative tests in `tests/test_validate.py` (`python3 -m unittest discover -s tests`). Repo tooling only: no manifest references it, and no version bump.
 
+## 0.5.0 (SKILL.md 1.4.0)
+
+- The skill's `description` now opens "Adults only; refuses minors." Some hosts show only the first ~57 characters of a skill description (Hermes cuts it there), and in the SWE-1547 eval the under-age rule further into the description never reached the model. The rest of the description keeps the same trigger words and adds "a date night".
+- The skill sends `client_skill_version` (`1.4.0`) on `drinkedin_get_guide` and on every `drinkedin_plan_night_out` call. When `meta.latest_skill_version` is newer or `notices` contains `skill_outdated`, the assistant says so once per session, in one line, with the returned link, and keeps planning. The privacy section says what that call counts: a daily count of the version and of the assistant program's name when DrinkedIn already recognises it; no location, no typed text, no IP address and no browser or app name.
+- Same text as the copies served by drinkedin.net (`/.well-known/skills/` and `/skills/`) and in the drinkedin repo (`distribution/drinkedin-bot/skills/`), byte-identical.
+- Version 0.5.0 in `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `.cursor-plugin/plugin.json` and `gemini-extension.json`. `server.json` (the MCP Registry entry) is unchanged at 1.1.0: the server URL and description did not change.
+
 ## 0.4.0 (SKILL.md 1.2.0)
 
 - The skill's `description` (the text hosts read when deciding to load it) now also covers a request from someone under the legal drinking age where they are: then no venues are planned or suggested, and no age is stated as a number. In the SWE-1547 eval, Claude Code and Hermes did not load the skill for such a request and answered from their own knowledge; a rule that must hold when the skill would not otherwise trigger has to be in the description.

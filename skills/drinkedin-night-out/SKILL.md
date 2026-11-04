@@ -1,10 +1,10 @@
 ---
 name: drinkedin-night-out
-description: Plan a walkable bar crawl, craft beer crawl, dinner and drinks, or club night near a place, using only venues DrinkedIn has validated against an official licence register or premises census, or the venue's own site. Use when someone asks for a bar crawl, drinks, nightlife or a night out near a place, an address, a city or near them. Needs the free DrinkedIn Night Out MCP server. For adults of legal drinking age where they are. Also use it when the person is under the legal drinking age where they are, such as a minor asking for a bar crawl or drinks; then do not plan or suggest any venues, and do not state a numeric age.
+description: Adults only; refuses minors. Bar crawls and nights out near a place, such as a walkable bar crawl, craft beer crawl, dinner and drinks, or club night, planned using only venues DrinkedIn has validated against an official licence register or premises census, or the venue's own site. Use when someone asks for a bar crawl, drinks, a date night, nightlife or a night out near a place, an address, a city or near them. Needs the free DrinkedIn Night Out MCP server. For adults of legal drinking age where they are. Also use it when the person is under the legal drinking age where they are, such as a minor asking for a bar crawl or drinks; then do not plan or suggest any venues, and do not state a numeric age.
 license: MIT
 compatibility: Needs the MCP server https://ai.drinkedin.net/mcp/night-out (streamable HTTP, no sign-in, no key). Without that server the skill cannot plan anything.
 metadata:
-  version: "1.2.0"
+  version: "1.4.0"
   homepage: https://drinkedin.net/docs/night-out
   publisher: Haim Barad
 ---
@@ -15,7 +15,7 @@ Plans a walkable route of 2 to 4 stops from real venues that DrinkedIn has valid
 
 ## Setup check
 
-1. At the start of a session, call `drinkedin_get_guide` once. It takes no input and returns some places with validated venues, the vibes you can apply, the route styles and the relay rules.
+1. At the start of a session, call `drinkedin_get_guide` once, with `client_skill_version` set to `1.4.0` (this file's version). It returns some places with validated venues, the vibes you can apply, the route styles and the relay rules.
 2. If `drinkedin_get_guide` and `drinkedin_plan_night_out` are not available, tell the person to add the MCP server `https://ai.drinkedin.net/mcp/night-out` (Streamable HTTP, no sign-in), then stop. In Claude Code: `claude mcp add --transport http drinkedin-night-out https://ai.drinkedin.net/mcp/night-out`. Never invent a plan.
 
 ## Choose the inputs
@@ -28,6 +28,7 @@ Call `drinkedin_plan_night_out`. It needs a place.
 - `city` with `region` or `country`: only when the name identifies one place. A name several places share returns `needs_input` with labelled choices.
 - `place_key`: taken from a `needs_input` reply, it names exactly one of the choices. Send it back to choose that place.
 - `style`, `stops` (2 to 4), `max_walk_m` and `vibes` (taken from the guide) shape the route. `budget`, `start_time` and `party_size` are accepted but do not change the route, so do not ask the person for them. With `budget` the reply adds `budget_not_verifiable`: say prices are not known. Replies are in English.
+- `client_skill_version`: `1.4.0`, this file's version, on every call, including `drinkedin_get_guide`. It does not change the route.
 
 ## Styles
 
@@ -73,6 +74,10 @@ After a route, `next` holds a ready call that swaps the last stop: the same argu
 
 A `planned` or `partial` route can carry `route.plan_url`, with its id in `route.plan_id`: a page on drinkedin.net that shows the stops, the walks between them and a route map. Offer it when the person wants to share or save the plan. Give it as a link the person may open, exactly as returned; never build or change a plan link yourself. If the route has no `plan_url`, the plan could not be saved: the route is still good, and there is no link to offer. When the person asks what the link keeps, use the Privacy section below.
 
+## Updates
+
+Pass `client_skill_version` `1.4.0` on `drinkedin_get_guide` and on every `drinkedin_plan_night_out` call. If `meta.latest_skill_version` is newer than `1.4.0`, or `notices` contains `skill_outdated`, tell the person once in this session, in one line, and give the `changelog_url` or `update_url` from the reply. Keep planning: the tools still return the route.
+
 ## Privacy
 
 - Use only a location the person shared or a place they named. Do not infer one.
@@ -80,3 +85,4 @@ A `planned` or `partial` route can carry `route.plan_url`, with its id in `route
 - No sign-in, key or token is involved.
 - A route with a `plan_url` is kept by DrinkedIn so the link works: for 30 days after that route was last planned, then it is deleted. The copy holds only the venues' public data (name, address, category, the venue's own coordinates, links, hours wording and sourced facts), the walks between stops, the style label, the town the stops share, and the dates it was made and expires. It never holds the person's coordinates, typed address, place name or `near` label, their IP address, or anything about the client. Anyone with the link can open the page. The id in it cannot be guessed, and the same route gets the same link.
 - Policies: https://drinkedin.net/p/privacy.html. Docs: https://drinkedin.net/docs/night-out.
+- A call that sends `client_skill_version` adds one to a daily count of that version and of the assistant program's name, when that name is one DrinkedIn already recognises. The count stores no location, no typed text, no IP address and no browser or app name.
