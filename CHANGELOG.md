@@ -1,14 +1,18 @@
 # Changelog
 
-## Unreleased
+## 0.6.0 (SKILL.md 1.5.1)
 
-- `scripts/validate.py` checks every per-channel manifest in one run (Claude Code plugin and marketplace, Cursor, Gemini CLI, MCP Registry `server.json`, the skill, and the OpenAI package and ZIP when `openai/` is present), plus cross-channel agreement and the copy rules. Stdlib only, no network. Negative tests in `tests/test_validate.py` (`python3 -m unittest discover -s tests`). Repo tooling only: no manifest references it, and no version bump.
+- The skill's `description` says what it plans, when to use it, and that plans are for adults of legal drinking age where they are.
+- Under-age requests: the planner is not called, the reply says in one sentence that DrinkedIn plans are for adults of legal drinking age where they are, and no age is stated as a number. Places from general knowledge are never presented as a DrinkedIn plan.
+- `drinkedin_get_guide` is described as reference data (places, route styles, vibes), and a plan does not require it first.
+- When a reply includes `share_text`, the skill uses it as-is for sharing or copying the plan.
+- No `client_skill_version` argument: the tools' input schemas do not define it.
+- Repository tooling (`scripts/`, `tests/`) moved out of the plugin; the plugin is the skill and its manifests.
+- Version 0.6.0 in `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `.cursor-plugin/plugin.json` and `gemini-extension.json`. `server.json` is unchanged at 1.1.0.
 
 ## 0.4.0 (SKILL.md 1.2.0)
 
-- The skill's `description` (the text hosts read when deciding to load it) now also covers a request from someone under the legal drinking age where they are: then no venues are planned or suggested, and no age is stated as a number. In the SWE-1547 eval, Claude Code and Hermes did not load the skill for such a request and answered from their own knowledge; a rule that must hold when the skill would not otherwise trigger has to be in the description.
-- The under-age section now also says not to suggest venues from general knowledge, and reads "Keep it to one sentence" instead of "do not lecture" (scanners flag caveat-suppressing phrases).
-- Version 0.4.0 in `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `.cursor-plugin/plugin.json` and `gemini-extension.json`. `server.json` (the MCP Registry entry) is unchanged at 1.1.0: the server URL and description did not change.
+- Under-age wording in the skill's `description` and body. Version 0.4.0 in the four manifests.
 
 ## 0.3.0 (SKILL.md 1.1.0)
 
