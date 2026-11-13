@@ -36,7 +36,7 @@ There are two tools:
 - `drinkedin_plan_night_out` plans the route and saves it for its share link (public venue data only, 30 days).
   - Give it latitude and longitude (preferred), a street address or landmark, or a place name with its region or country.
   - Optional: `style` (`bar_crawl`, `craft_beer_crawl`, `dinner_and_drinks`, `club_night`), `stops` (2 to 4) and `max_walk_m` (200 to 2000).
-- `drinkedin_get_guide` explains how to call the planner and the rules for relaying a plan. It is read-only.
+- `drinkedin_get_guide` lists the supported places, route styles and vibes. It is read-only.
 
 Example prompts:
 

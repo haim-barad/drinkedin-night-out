@@ -15,7 +15,7 @@ Plans a walkable route of 2 to 4 stops from real venues that DrinkedIn has valid
 
 ## Setup check
 
-1. At the start of a session, call `drinkedin_get_guide` once. It takes no input and lists some places with validated venues, the vibes you can apply and the route styles.
+1. `drinkedin_get_guide` takes no input and lists some places with validated venues, the vibes you can apply and the route styles. Call it when you need those; a plan does not require it first.
 2. If `drinkedin_get_guide` and `drinkedin_plan_night_out` are not available, tell the person to add the MCP server `https://ai.drinkedin.net/mcp/night-out` (Streamable HTTP, no sign-in), then stop. In Claude Code: `claude mcp add --transport http drinkedin-night-out https://ai.drinkedin.net/mcp/night-out`. Never invent a plan.
 
 ## Choose the inputs
@@ -47,7 +47,7 @@ Every reply carries `status`, `meaning`, `say_to_owner` and `notices`.
 | `planned` | A route with the stops asked for. Show the stops as returned and add no venue or detail of your own. |
 | `partial` | Fewer stops than asked for: the longest walkable route the validated venues allow. Say so and show the route. If a style was used, offer to try without it. Do not fill the gap with other places. |
 | `needs_input` | The tool needs something from the person: a location, a choice between places that share a name, a more specific address, valid coordinates, or a vibe or style it knows. Ask for what `meaning` says is missing, then call again. Never guess between choices. |
-| `no_coverage` | Not enough validated venues close together, or no venue records for that place. Say so plainly. Where the reply lists `largest_places`, you may offer them as "some places with validated venues" (not a ranking); never call a place covered, best covered or supported. Do not suggest venues of your own and do not offer to search the web for others. If a `style` or `vibes` was used, say so and offer to try without it; ask before raising `max_walk_m`. |
+| `no_coverage` | Not enough validated venues close together, or no venue records for that place. Say so plainly. Where the reply lists `largest_places`, you may offer them as "some places with validated venues" (not a ranking); never call a place covered, best covered or supported. Do not present venues of your own as DrinkedIn results. If a `style` or `vibes` was used, say so and offer to try without it; ask before raising `max_walk_m`. |
 | `error` | A fault on DrinkedIn's side, flagged `isError`. Tell the person it failed and try again in a moment. |
 
 `drinkedin_get_guide` replies with status `ok`. Each stop's `hours.status` and `price.status` are `unverified`; these are not plan statuses.
@@ -68,7 +68,7 @@ If the person says they are under the legal drinking age where they are, do not 
 
 ## Swap a stop
 
-After a route, `next` holds a ready call that swaps the last stop: the same arguments plus `exclude_ids` with that stop's `venue_id`. To replace a different stop, call again with its `venue_id` added to `exclude_ids`. Offer a swap when the person dislikes a stop.
+After a route, `next` holds a ready call that swaps the last stop: its arguments are the ones to send as they are, with that stop's `venue_id` in `exclude_ids`. To replace a different stop, call again with its `venue_id` added to `exclude_ids`. Offer a swap when the person dislikes a stop.
 
 ## Share or save the plan
 
