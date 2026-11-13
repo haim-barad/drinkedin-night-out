@@ -1,10 +1,10 @@
 ---
 name: drinkedin-night-out
-description: Plan a walkable bar crawl, craft beer crawl, dinner and drinks, or club night near a place, using only venues DrinkedIn has validated against an official licence register or premises census, or the venue's own site. Use when someone asks for a bar crawl, drinks, nightlife or a night out near a place, an address, a city or near them. Needs the free DrinkedIn Night Out MCP server. For adults of legal drinking age where they are. Also use it when the person is under the legal drinking age where they are, such as a minor asking for a bar crawl or drinks; then do not plan or suggest any venues, and do not state a numeric age.
+description: Plan a walkable bar crawl, craft beer crawl, dinner and drinks, or club night near a place, using only venues DrinkedIn has validated against an official licence register or premises census, or the venue's own site. Use when someone asks for a bar crawl, drinks, nightlife or a night out near a place, an address, a city or near them. Needs the free DrinkedIn Night Out MCP server. For adults of legal drinking age where they are.
 license: MIT
 compatibility: Needs the MCP server https://ai.drinkedin.net/mcp/night-out (streamable HTTP, no sign-in, no key). Without that server the skill cannot plan anything.
 metadata:
-  version: "1.2.0"
+  version: "1.5.1"
   homepage: https://drinkedin.net/docs/night-out
   publisher: Haim Barad
 ---
@@ -15,7 +15,7 @@ Plans a walkable route of 2 to 4 stops from real venues that DrinkedIn has valid
 
 ## Setup check
 
-1. At the start of a session, call `drinkedin_get_guide` once. It takes no input and returns some places with validated venues, the vibes you can apply, the route styles and the relay rules.
+1. At the start of a session, call `drinkedin_get_guide` once. It takes no input and lists some places with validated venues, the vibes you can apply and the route styles.
 2. If `drinkedin_get_guide` and `drinkedin_plan_night_out` are not available, tell the person to add the MCP server `https://ai.drinkedin.net/mcp/night-out` (Streamable HTTP, no sign-in), then stop. In Claude Code: `claude mcp add --transport http drinkedin-night-out https://ai.drinkedin.net/mcp/night-out`. Never invent a plan.
 
 ## Choose the inputs
@@ -52,9 +52,10 @@ Every reply carries `status`, `meaning`, `say_to_owner` and `notices`.
 
 `drinkedin_get_guide` replies with status `ok`. Each stop's `hours.status` and `price.status` are `unverified`; these are not plan statuses.
 
-## Relay rules
+## When you relay a plan
 
 - Show the stops as returned, in order, with the name, address, category, walk and links the reply gives. Add nothing.
+- If the reply includes `share_text`, use it as-is when the person wants to send or copy the plan.
 - Walking times are estimates (straight-line distance times 1.3). Say so.
 - Hours and prices are never stated. Each stop marks them unverified: tell the person to check with the venue.
 - Include the legal drinking age notice: say the plan is for adults "of legal drinking age where they are". Never state an age as a number, not even the local one: that notice is the whole statement about age and the local law.
@@ -63,7 +64,7 @@ Every reply carries `status`, `meaning`, `say_to_owner` and `notices`.
 
 ## If the person is under the legal drinking age
 
-If the person says they are under the legal drinking age where they are, do not call `drinkedin_plan_night_out`, and do not suggest venues from your own knowledge either. Say that DrinkedIn plans are for adults of legal drinking age where they are, and offer help with something that is not about drinking. Keep it to one sentence. Do not state an age as a number.
+If the person says they are under the legal drinking age where they are, do not call `drinkedin_plan_night_out`. Say in one sentence that DrinkedIn plans are for adults of legal drinking age where they are, and offer help with something that is not about drinking. Do not state an age as a number. Do not present places from your own knowledge as a DrinkedIn plan; if you suggest any, say they come from general knowledge and are unchecked.
 
 ## Swap a stop
 
