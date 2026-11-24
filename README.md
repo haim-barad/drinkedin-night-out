@@ -1,5 +1,7 @@
 # DrinkedIn Night Out
 
+[![DrinkedIn Night Out MCP connector](https://glama.ai/mcp/connectors/io.github.haim-barad/drinkedin-night-out/badges/score.svg)](https://glama.ai/mcp/connectors/io.github.haim-barad/drinkedin-night-out)
+
 This plugin connects Claude Code to the DrinkedIn Night Out MCP server at `https://ai.drinkedin.net/mcp/night-out` (Streamable HTTP). The server is free and needs no account or key. It books and buys nothing. The one thing it saves is a planned route, so the route's share link works (see Plan links below); it never saves your location.
 
 ## Install (Claude Code)
